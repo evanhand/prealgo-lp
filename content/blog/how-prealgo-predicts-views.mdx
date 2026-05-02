@@ -1,0 +1,67 @@
+---
+title: "How PreAlgo predicts views before you post"
+description: "The system anchors on real posted videos, not synthetic estimates. Here's the algorithm explained without jargon."
+category: "guide"
+date: "2026-05-02"
+tags: ["how it works", "view prediction", "ai grading", "creator tools"]
+faqs:
+  - q: "How accurate are PreAlgo's view predictions?"
+    a: "Predictions are typically in the right order of magnitude. They won't reliably forecast viral outliers (5M+) but they'll get the creator-expected outcome and the upside ceiling close. Three numbers per platform: typical creator, your account, and best-case if it pops."
+  - q: "Why does the same video get a slightly different grade across re-runs?"
+    a: "The Gemini model that judges your video varies between runs (e.g. hook execution might score 4 vs 5). One point on a 1-5 scale propagates through the algorithm. We continue tuning to reduce that variance."
+  - q: "What does 'trained on 10,000+ videos' actually mean?"
+    a: "PreAlgo searches a database of 10,000+ real posted videos with actual view counts to find the closest comparables for your upload. Predictions reflect what those real comparable videos actually got, not synthetic estimates."
+---
+
+Most "AI content tools" tell you to optimize your hook. They don't tell you what your video will actually do. PreAlgo does.
+
+Here's how the prediction works, in four plain-English steps.
+
+## Step 1: Gemini watches the video
+
+When you upload, the file streams to Google's Gemini model. It watches the full video and rates the components on a 1-5 scale: hook strength, value clarity, x-factor (the share-trigger), format quality, execution. These ratings become your **quality composite**, a single number out of 100.
+
+## Step 2: We pull real comparable videos
+
+We search a database of 10,000+ real posted videos with actual view counts. The search uses embedding similarity, which means it finds videos that are *about* the same thing as yours, not just videos with similar tags. Three different lenses:
+
+<StatGrid>
+  <StatCard stat="Most similar" label="Nearest by embedding" />
+  <StatCard stat="Highest views" label="Topic ceiling" />
+  <StatCard stat="Most recent" label="Trending signal" />
+</StatGrid>
+
+This gives the validator a complete picture: floor, ceiling, and what's working *now*.
+
+## Step 3: Anchor on creator history if available
+
+If your prealgo account is linked to The Content Labs (or matches by email), the algorithm also pulls **your own** posting history. Your median post, your top 10%, your historical max. A creator whose past videos hit 1.7M shouldn't get predicted at the niche median of 30K.
+
+This is the difference between "what happens if a typical creator posts this" and "what happens if **you** post this".
+
+## Step 4: Compute three predictions per platform
+
+Output isn't a single number. It's a 3×3 grid:
+
+|  | Typical creator | Your account | If it goes viral |
+|---|---|---|---|
+| **TikTok** | 25K-50K | 300K-500K | 1M-3M |
+| **Instagram** | 50K-75K | 150K-300K | 500K-750K |
+| **YouTube Shorts** | 8K-15K | 25K-50K | 150K-300K |
+
+The *typical* column anchors on niche median. The *your account* column anchors on your historical distribution. The *best case* column anchors on the topic's ceiling. You see all three so you can size the upside without losing the realistic baseline.
+
+## What it doesn't do
+
+PreAlgo won't predict 9M views on a video that nobody could have predicted. View distributions are heavy-tailed; the very long upper tail is genuinely hard to forecast in advance. What we will reliably tell you is whether the video's quality and creator-fit are good enough that it *could* break out, given the topical and platform context.
+
+## Why this beats keyword-driven tools
+
+Most "creator AI" tools optimize for SEO inside a video (titles, captions, hashtags). That's table stakes. The harder question is **does the video's structure work** — hook strength, retention curve, x-factor presence. PreAlgo grades those before you publish, so you can fix them before the algorithm sees them.
+
+<CTA
+  headline="See your next video's grade before you post it."
+  sub="Free plan included. 60-120 second analysis. No credit card."
+  primary="Analyze a video free"
+  secondary="See pricing"
+/>

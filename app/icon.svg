@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+    <linearGradient id="chartGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="url(#bgGrad)"/>
+  <g transform="translate(80, 120)">
+    <rect x="0" y="180" width="60" height="92" rx="8" fill="url(#chartGrad)"/>
+    <rect x="96" y="120" width="60" height="152" rx="8" fill="url(#chartGrad)"/>
+    <rect x="192" y="60" width="60" height="212" rx="8" fill="url(#chartGrad)"/>
+    <rect x="288" y="0" width="60" height="272" rx="8" fill="white"/>
+  </g>
+  <circle cx="368" cy="120" r="48" fill="white" fill-opacity="0.2"/>
+  <path d="M352 120L364 132L388 108" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

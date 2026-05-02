@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
+import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -69,7 +70,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable}`}>
-      <body className="min-h-screen antialiased font-sans">{children}</body>
+      <body className="min-h-screen antialiased font-sans">
+        <AnalyticsProvider />
+        {children}
+      </body>
     </html>
   );
 }

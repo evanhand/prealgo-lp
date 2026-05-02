@@ -1,17 +1,17 @@
 /**
  * Build-time OG image generator. Generates the default 1200x630 PNG
- * (public/og-image.png) used by every page that doesn't override its own.
- *
- * Add per-page OG images by adding entries to JOBS below. Future blog posts
- * will be auto-discovered via content/blog/ scanning (TBD when blog content
- * lands).
+ * (public/og-image.png) plus a per-post PNG for every blog post in
+ * content/blog/ (output: public/og/blog-<slug>.png).
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import matter from 'gray-matter';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 
 const OUT_DIR = path.join(process.cwd(), 'public');
+const OG_OUT_DIR = path.join(OUT_DIR, 'og');
+const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 const FONT_CACHE = path.join(process.cwd(), '.fonts-cache');
 
 const PURPLE_500 = '#a855f7';
@@ -209,8 +209,10 @@ function template(job: Job) {
 async function main() {
   const [regular, bold] = await Promise.all([getFont(400), getFont(700)]);
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
+  if (!fs.existsSync(OG_OUT_DIR)) fs.mkdirSync(OG_OUT_DIR, { recursive: true });
 
-  for (const job of JOBS) {
+  // Build a single PNG via the satori → resvg pipeline.
+  const renderJob = async (job: Job, outPath: string) => {
     const svg = await satori(template(job) as any, {
       width: 1200,
       height: 630,
@@ -220,9 +222,35 @@ async function main() {
       ],
     });
     const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
-    const out = path.join(OUT_DIR, job.outFile);
-    fs.writeFileSync(out, png);
-    console.log(`✓ wrote ${out} (${(png.length / 1024).toFixed(1)} KB)`);
+    fs.writeFileSync(outPath, png);
+    console.log(`✓ wrote ${outPath} (${(png.length / 1024).toFixed(1)} KB)`);
+  };
+
+  // Default OG + any custom JOBS at top of file.
+  for (const job of JOBS) {
+    await renderJob(job, path.join(OUT_DIR, job.outFile));
+  }
+
+  // Per-blog-post OG images. Discovers content/blog/*.mdx, reads the
+  // frontmatter title + category, renders to public/og/blog-<slug>.png.
+  if (fs.existsSync(BLOG_DIR)) {
+    const slugs = fs
+      .readdirSync(BLOG_DIR)
+      .filter((f) => f.endsWith('.mdx'))
+      .map((f) => f.replace(/\.mdx$/, ''));
+
+    for (const slug of slugs) {
+      const raw = fs.readFileSync(path.join(BLOG_DIR, `${slug}.mdx`), 'utf-8');
+      const { data } = matter(raw);
+      const job: Job = {
+        outFile: '',
+        eyebrow: String((data.category ?? 'BLOG')).toUpperCase(),
+        title: String(data.title ?? slug),
+        footnote: 'prealgo.com/blog',
+      };
+      const outPath = path.join(OG_OUT_DIR, `blog-${slug}.png`);
+      await renderJob(job, outPath);
+    }
   }
 }
 
