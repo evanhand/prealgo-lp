@@ -29,3 +29,98 @@ body {
     padding-right: 2rem;
   }
 }
+
+/* ── Futuristic tech-site utilities (ported from the Vite app) ── */
+
+.gradient-text {
+  @apply bg-gradient-to-r from-white to-primary-200 bg-clip-text text-transparent;
+}
+
+.bg-grid-tech {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-grid-tight {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.mask-radial-fade {
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+.mask-fade-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+}
+
+.hero-pinlight {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(168, 85, 247, 0.25), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 50% 10%, rgba(99, 102, 241, 0.15), transparent 70%);
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  opacity: 0.04;
+}
+
+.section-divider-glow {
+  background: linear-gradient(to right, transparent 0%, rgba(168, 85, 247, 0.4) 50%, transparent 100%);
+  height: 1px;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-feature-settings: "ss02", "cv02";
+}
+
+.accent-gradient {
+  background-image: linear-gradient(
+    90deg,
+    #c084fc 0%,
+    #a855f7 25%,
+    #7c3aed 50%,
+    #a855f7 75%,
+    #c084fc 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: accentShimmer 8s linear infinite;
+}
+
+@keyframes accentShimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.aura-pulse {
+  position: absolute;
+  inset: -40px;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, rgba(168, 85, 247, 0.35), transparent 70%);
+  filter: blur(40px);
+  animation: auraBreathe 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes auraBreathe {
+  0%, 100% { opacity: 0.5; transform: scale(0.95); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+
+.marching-ants {
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.6), rgba(168, 85, 247, 0)) top/100% 1px no-repeat,
+              linear-gradient(90deg, rgba(168, 85, 247, 0), rgba(168, 85, 247, 0.6)) bottom/100% 1px no-repeat;
+}
