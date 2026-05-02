@@ -1,0 +1,33 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# next.js
+.next
+out
+next-env.d.ts
+
+# build output
+*.tsbuildinfo
+
+# env
+.env*.local
+.env
+
+# fonts cache (regenerated on build)
+.fonts-cache
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*

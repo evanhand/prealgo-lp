@@ -1,0 +1,52 @@
+{
+  "name": "prealgo-lp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "tsx scripts/generate-sitemap.ts && tsx scripts/generate-og-images.tsx && next build",
+    "build:og": "tsx scripts/generate-og-images.tsx",
+    "build:sitemap": "tsx scripts/generate-sitemap.ts",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.2.3",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/mdx": "^2.0.13",
+    "framer-motion": "^12.38.0",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.469.0",
+    "next": "16.2.2",
+    "posthog-js": "^1.365.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "reading-time": "^1.5.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx-frontmatter": "^5.2.0",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.27",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.2",
+    "postcss": "^8.5.8",
+    "satori": "^0.26.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5"
+  },
+  "browserslist": [
+    "Chrome >= 87",
+    "Edge >= 88",
+    "Firefox >= 78",
+    "Safari >= 14"
+  ]
+}

@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Dashboard, auth, and admin routes are proxied to the Vite app — they
+# do not belong in the marketing-site index.
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /onboarding
+Disallow: /upload
+Disallow: /analysis
+Disallow: /history
+Disallow: /progress
+Disallow: /settings
+Disallow: /checkout-success
+Disallow: /reset-password
+
+Sitemap: https://prealgo.com/sitemap.xml
