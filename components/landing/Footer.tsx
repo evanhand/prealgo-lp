@@ -71,6 +71,7 @@ export const Footer: React.FC = () => {
             </h5>
             <ul className="space-y-2.5">
               <FooterLink to="mailto:business@thecontentlabs.io" label="Contact" external />
+              <FooterLink to="/blog" label="Blog" />
               <FooterLink to="/faq" label="FAQ" />
               <FooterLink to="/terms" label="Terms of Service" />
               <FooterLink to="/privacy" label="Privacy Policy" />

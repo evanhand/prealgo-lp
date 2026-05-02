@@ -51,6 +51,7 @@ export const Navbar: React.FC = () => {
               <NavLink href="/features" label="Features" />
               <NavLink href="/pricing" label="Pricing" />
               <NavLink href="/sample" label="Sample" />
+              <NavLink href="/blog" label="Blog" />
               <NavLink href="/about" label="About" />
               <NavLink href="/faq" label="FAQ" />
             </div>
@@ -94,6 +95,7 @@ export const Navbar: React.FC = () => {
                 <MobileNavLink href="/features" label="Features" />
                 <MobileNavLink href="/pricing" label="Pricing" />
                 <MobileNavLink href="/sample" label="Sample" />
+                <MobileNavLink href="/blog" label="Blog" />
                 <MobileNavLink href="/about" label="About" />
                 <MobileNavLink href="/faq" label="FAQ" />
 

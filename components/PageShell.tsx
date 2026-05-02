@@ -1,5 +1,5 @@
-import { Navbar } from './Navbar';
-import { Footer } from './Footer';
+import { Navbar } from './landing/Navbar';
+import { Footer } from './landing/Footer';
 
 export function PageShell({ children }: { children: React.ReactNode }) {
   return (
