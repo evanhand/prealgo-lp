@@ -17,84 +17,84 @@ NODE_VERSION = "20"
 # Vite app static assets (JS/CSS bundles loaded by proxied app pages)
 [[redirects]]
 from = "/assets/*"
-to = "https://VITE_APP_URL.netlify.app/assets/:splat"
+to = "https://superb-salamander-7c2a41.netlify.app/assets/:splat"
 status = 200
 
 # Auth + onboarding routes
 [[redirects]]
 from = "/login"
-to = "https://VITE_APP_URL.netlify.app/login"
+to = "https://superb-salamander-7c2a41.netlify.app/login"
 status = 200
 
 [[redirects]]
 from = "/signup"
-to = "https://VITE_APP_URL.netlify.app/signup"
+to = "https://superb-salamander-7c2a41.netlify.app/signup"
 status = 200
 
 [[redirects]]
 from = "/forgot-password"
-to = "https://VITE_APP_URL.netlify.app/forgot-password"
+to = "https://superb-salamander-7c2a41.netlify.app/forgot-password"
 status = 200
 
 [[redirects]]
 from = "/reset-password"
-to = "https://VITE_APP_URL.netlify.app/reset-password"
+to = "https://superb-salamander-7c2a41.netlify.app/reset-password"
 status = 200
 
 [[redirects]]
 from = "/onboarding"
-to = "https://VITE_APP_URL.netlify.app/onboarding"
+to = "https://superb-salamander-7c2a41.netlify.app/onboarding"
 status = 200
 
 # Dashboard + product routes
 [[redirects]]
 from = "/dashboard/*"
-to = "https://VITE_APP_URL.netlify.app/dashboard/:splat"
+to = "https://superb-salamander-7c2a41.netlify.app/dashboard/:splat"
 status = 200
 
 [[redirects]]
 from = "/upload"
-to = "https://VITE_APP_URL.netlify.app/upload"
+to = "https://superb-salamander-7c2a41.netlify.app/upload"
 status = 200
 
 [[redirects]]
 from = "/analysis/*"
-to = "https://VITE_APP_URL.netlify.app/analysis/:splat"
+to = "https://superb-salamander-7c2a41.netlify.app/analysis/:splat"
 status = 200
 
 [[redirects]]
 from = "/shared/*"
-to = "https://VITE_APP_URL.netlify.app/shared/:splat"
+to = "https://superb-salamander-7c2a41.netlify.app/shared/:splat"
 status = 200
 
 [[redirects]]
 from = "/history"
-to = "https://VITE_APP_URL.netlify.app/history"
+to = "https://superb-salamander-7c2a41.netlify.app/history"
 status = 200
 
 [[redirects]]
 from = "/progress"
-to = "https://VITE_APP_URL.netlify.app/progress"
+to = "https://superb-salamander-7c2a41.netlify.app/progress"
 status = 200
 
 [[redirects]]
 from = "/settings"
-to = "https://VITE_APP_URL.netlify.app/settings"
+to = "https://superb-salamander-7c2a41.netlify.app/settings"
 status = 200
 
 [[redirects]]
 from = "/billing"
-to = "https://VITE_APP_URL.netlify.app/billing"
+to = "https://superb-salamander-7c2a41.netlify.app/billing"
 status = 200
 
 [[redirects]]
 from = "/checkout-success"
-to = "https://VITE_APP_URL.netlify.app/checkout-success"
+to = "https://superb-salamander-7c2a41.netlify.app/checkout-success"
 status = 200
 
 [[redirects]]
 from = "/admin/*"
-to = "https://VITE_APP_URL.netlify.app/admin/:splat"
+to = "https://superb-salamander-7c2a41.netlify.app/admin/:splat"
 status = 200
 
 # Cache hashed Next.js assets forever (content-hashed filenames)
