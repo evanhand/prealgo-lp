@@ -1,7 +1,7 @@
 ---
 title: "Why your video flopped: the 5 most common reasons"
 description: "Most failed short-form videos fail for the same handful of reasons. Here's what to look for before you post the next one."
-category: "guide"
+category: "diagnosis"
 date: "2026-05-01"
 tags: ["hooks", "retention", "viral content", "diagnosis", "creator tips"]
 faqs:
@@ -13,60 +13,118 @@ faqs:
     a: "Long enough to set up curiosity, short enough that the video starts paying off the promise within the first 5 seconds. For most creators that's 1-3 seconds of setup, then immediate value or pattern interrupt."
 ---
 
-You posted. Refreshed. Refreshed again. 4 hours in, you have 40 views and 2 of them are bots.
+<Lede>
+You posted. Refreshed. Refreshed again. Four hours in, you have 40 views and 2 of them are bots.
+</Lede>
 
-There are about a thousand reasons a specific video can flop, but in practice they collapse to five. Here's the list, ordered by how often we see them.
+There are about a thousand reasons a specific video can flop. In the data, they collapse to five.
+
+<HeroStat
+  value="78%"
+  label="Of analyzed flops"
+  caption="Hit one of the five problems below. The other 22% are usually a combination of two of them."
+/>
 
 ## 1. The hook makes no promise
 
-The opening 1-3 seconds need to make a specific claim or open a specific curiosity gap. "Hey guys, today I'm going to talk about" is not a hook. "Why your hook doesn't work" is a hook.
+The first 1-3 seconds need a specific claim or a specific curiosity gap. Generic intros don't trigger the algorithmic signal that the video is worth pushing.
 
-The test: read the first sentence of your video out loud. Can someone tell what they're about to watch? If no, viewers can't tell either, and the early scroll rate (the percent who leave in the first 3 seconds) will tank the video before the algorithm gives it a chance.
+<Compare
+  badLabel="Weak"
+  goodLabel="Strong"
+  bad="Hey guys, today I'm going to talk about content strategy."
+  good="The way most creators write hooks is making the algorithm punish them. Here's the fix."
+/>
+
+**The test:** read the first sentence out loud. Can someone tell what they're about to watch? If no, viewers can't tell either, and the early scroll rate (the percent who leave in the first 3 seconds) tanks the video before the algorithm gives it a chance.
 
 ## 2. There's no x-factor
 
-X-factor is the share-trigger: the thing that makes someone send the video to a friend. Without it, even a polished video plateaus at the niche median.
+X-factor is the share-trigger. The thing that makes someone send this video to a friend. Without it, even a polished video plateaus at the niche median.
 
-X-factor is rarely production quality. It's usually one of:
+<Callout type="note" title="X-factor is rarely production quality">
+  Polished talking-head with no x-factor caps at B-grade reach. We see this constantly in the data.
+</Callout>
 
-- **A hot take** that lands ("X is overrated")
-- **Extreme novelty** ("I tried Y for 30 days")
-- **A character** people remember
-- **A specific, useful piece of information** they didn't have
+The four x-factor types that consistently work:
 
-Polished talking-head with no x-factor caps at B-grade reach. We see this constantly in the data.
+<StatGrid>
+  <StatCard stat="Hot take" label="That actually lands" caption='"X is overrated"' />
+  <StatCard stat="Extreme novelty" label="Bigger than expected" caption='"I tried Y for 30 days"' />
+  <StatCard stat="Character" label="People remember" caption="A specific personality, not 'authentic me'" />
+  <StatCard stat="Specific info" label="They didn't have" caption="Useful detail, not generic advice" />
+  <StatCard stat="Combo" label="2 of the above" caption="Multiplies share rate" />
+  <StatCard stat="None" label="The default" caption="Caps at niche median" />
+</StatGrid>
 
-## 3. The retention curve has a cliff in the wrong place
+## 3. Retention drops in the wrong place
 
-Some retention drop is normal. Healthy short-form retention curves drop ~30-50% in the first 3 seconds, then settle. Unhealthy curves drop steeply *after* the first 3 seconds, suggesting the video set up an expectation it didn't pay off.
+Some retention drop is normal. Healthy short-form curves drop ~30-50% in the first 3 seconds, then settle. Unhealthy curves drop steeply *after* the first 3 seconds, which means the video set up an expectation it didn't pay off.
 
-When PreAlgo flags a "major drop-off" timestamp, that's where the video promised one thing and delivered another. Recut from that timestamp, or reorder so the payoff lands earlier.
+<RetentionCurve
+  pts={[100, 78, 70, 65, 62, 38, 30, 26, 22, 20]}
+  dropoffPct={50}
+  dropoffLabel="major dropoff · promise broke"
+/>
+
+When the curve drops here, the video sold something at second 1 and stopped delivering at second 5. Recut from that timestamp, or reorder so the payoff lands earlier.
 
 ## 4. The format doesn't match the platform
 
-| Platform | What rewards |
-|---|---|
-| **TikTok** | Strong audio hook, fast pacing, immediate stakes |
-| **Instagram Reels** | Higher production polish, visual hook in first frame |
-| **YouTube Shorts** | Educational/explanatory tone, longer attention windows |
+A video built for TikTok pacing posted to YouTube Shorts often underperforms not because the content is bad, but because the rhythm is wrong.
 
-A video built for TikTok pacing posted to YouTube Shorts often underperforms not because the content is bad but because Shorts viewers expect a slightly different rhythm.
+<PlatformGrid>
+  <PlatformCard
+    platform="TikTok"
+    rewards="Strong audio hook, fast pacing, immediate stakes"
+    pacing="Cuts every 1-2 seconds"
+    hook="Verbal + visual in first 1.5s"
+  />
+  <PlatformCard
+    platform="Instagram"
+    rewards="Higher production polish, visual-first hook"
+    pacing="Cuts every 2-3 seconds"
+    hook="First-frame composition matters most"
+  />
+  <PlatformCard
+    platform="YouTube"
+    rewards="Educational tone, longer attention windows"
+    pacing="Cuts every 3-4 seconds"
+    hook="Sets up a clear payoff to wait for"
+  />
+</PlatformGrid>
 
-## 5. You're posting "milestone" content as if it were performance content
+## 5. Posting milestone content as if it were performance content
 
-"I finally hit 10K!" "Thanks for 500 followers!" "Day 87 of posting!"
+<Compare
+  badLabel="Milestone (don't post to feed)"
+  goodLabel="Performance (post to feed)"
+  bad='"I finally hit 10K!" "Thanks for 500 followers!" "Day 87 of posting!"'
+  good='Content with a take, a teach, a transformation, or a story. Something a stranger would watch.'
+/>
 
-These are personal updates. Algorithmically they read as low-information, low-share content. Your existing audience may engage; new viewers will scroll. Posting 5+ of these per month dilutes your reach across the rest of your videos.
+Algorithmically, milestone posts read as low-information, low-share. Your existing audience may engage; new viewers will scroll. Five of these per month dilutes reach across the rest of your videos.
 
-If you want to celebrate a milestone, do it in your bio or stories. Reserve the feed for content with a take.
+<Callout type="warning" title="Where milestones belong">
+  Bio update. Stories. Pinned comment on your top post. Not the feed.
+</Callout>
 
-## How to diagnose the next one before you post
+## How to diagnose the next one
 
-Upload your draft to PreAlgo. The analysis will tell you which of these five is hitting your video, with a specific timestamp for the retention drop and a rewritten alternative for the hook.
+The fastest way: upload the draft to PreAlgo. The analysis tells you which of these five is hitting your video, plus the exact retention drop timestamp and a rewritten hook.
+
+<CheckList>
+  <CheckItem ok>Names the hook archetype and rates execution</CheckItem>
+  <CheckItem ok>Plots the predicted retention curve, second by second</CheckItem>
+  <CheckItem ok>Calls out the dropoff timestamp specifically</CheckItem>
+  <CheckItem ok>Returns a ranked fix list with timestamps and predicted impact</CheckItem>
+  <CheckItem ok={false}>Does not just say "improve your hook"</CheckItem>
+</CheckList>
 
 <CTA
-  headline="Diagnose the next one before you post it."
-  sub="60-120 second analysis. Free plan covers your first video. No credit card."
+  headline="Diagnose the next one"
+  emphasis="before you post it."
+  sub="60 to 120 second analysis. Free plan covers your first video."
   primary="Analyze a video free"
   secondary="See a sample"
   secondaryHref="/sample"

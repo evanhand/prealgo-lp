@@ -7,9 +7,11 @@ import matter from 'gray-matter';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import { Calendar, Clock, ArrowLeft, ArrowRight } from 'lucide-react';
-import { PageShell } from '@/components/PageShell';
+import { Navbar } from '@/components/landing/Navbar';
+import { Footer } from '@/components/landing/Footer';
 import { JsonLd } from '@/components/JsonLd';
 import { mdxComponents } from '@/components/blog/MDXComponents';
+import { BlogFaqList } from '@/components/blog/BlogFaqList';
 import { getAllSlugs, getPostMeta } from '@/lib/blog';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'blog');
@@ -80,7 +82,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   });
 
   return (
-    <PageShell>
+    <div className="flex min-h-screen flex-col bg-neutral-950 text-white">
+      <Navbar />
+
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -125,88 +129,128 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         }}
       />
 
-      <article className="container-tight max-w-3xl pb-16 pt-4">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-white/55 hover:text-white transition-colors mb-6"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Back to blog
-        </Link>
+      {/* HEADER */}
+      <section className="relative overflow-hidden pt-28 sm:pt-32">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-40 left-1/2 h-[500px] w-[1000px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(168,85,247,0.14),transparent_70%)]" />
+        </div>
 
-        <header className="mb-10">
-          {data.category && (
-            <p className="font-mono text-[11px] uppercase tracking-widest text-primary-300 mb-3">
-              {data.category}
-            </p>
-          )}
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl leading-[1.1]">
-            {meta.title}
-          </h1>
-          <p className="mt-5 text-lg text-white/65 leading-relaxed">{meta.description}</p>
+        <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 relative">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-white/55 hover:text-white transition-colors mb-8"
+          >
+            <ArrowLeft className="h-3 w-3" />
+            Back to blog
+          </Link>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/45">
-            <span className="inline-flex items-center gap-1.5">
-              <Calendar className="h-3.5 w-3.5" />
-              {dateLabel}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5" />
-              {meta.readingTime}
-            </span>
-            {meta.tags && meta.tags.length > 0 && (
-              <span className="inline-flex flex-wrap gap-1.5">
-                {meta.tags.slice(0, 4).map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] uppercase tracking-widest font-mono text-white/55"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </span>
+          <header className="mb-10">
+            {data.category && (
+              <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-primary-300 mb-5">
+                <span>{data.category}</span>
+                <span className="h-px w-6 bg-primary-300/40" />
+                <span className="text-white/40">{dateLabel}</span>
+              </div>
             )}
-          </div>
-        </header>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.05]">
+              {meta.title}
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-white/65 leading-relaxed">
+              {meta.description}
+            </p>
 
-        <div className="prose prose-invert prose-neutral max-w-none prose-headings:text-white prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-p:text-white/75 prose-p:leading-relaxed prose-strong:text-white prose-li:text-white/75 prose-a:text-primary-300 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary-500/40 prose-blockquote:text-white/65 prose-code:text-primary-200 prose-code:bg-white/[0.04] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
+            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-widest text-white/40">
+              <span className="inline-flex items-center gap-1.5">
+                <Calendar className="h-3 w-3" />
+                {dateLabel}
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="h-3 w-3" />
+                {meta.readingTime}
+              </span>
+              {meta.tags && meta.tags.length > 0 && (
+                <span className="inline-flex flex-wrap gap-1.5">
+                  {meta.tags.slice(0, 4).map((t) => (
+                    <span
+                      key={t}
+                      className="rounded border border-white/10 bg-white/[0.03] px-1.5 py-0.5 text-[10px] tracking-widest text-white/55"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </span>
+              )}
+            </div>
+          </header>
+        </div>
+      </section>
+
+      {/* BODY */}
+      <article className="mx-auto w-full max-w-3xl px-4 sm:px-6 pb-12">
+        <div className="prose prose-invert prose-neutral max-w-none prose-headings:text-white prose-headings:tracking-tight prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:font-bold prose-h2:mt-14 prose-h2:mb-4 prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-10 prose-h3:mb-3 prose-p:text-white/75 prose-p:leading-relaxed prose-strong:text-white prose-li:text-white/75 prose-a:text-primary-300 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary-500/40 prose-blockquote:text-white/65 prose-code:text-primary-200 prose-code:bg-white/[0.04] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
           {mdxContent}
         </div>
 
         {meta.faqs && meta.faqs.length > 0 && (
-          <section className="mt-16 border-t border-white/[0.08] pt-10">
-            <h2 className="text-2xl font-bold tracking-tight text-white mb-6">FAQs</h2>
-            <div className="space-y-3">
-              {meta.faqs.map((faq) => (
-                <details
-                  key={faq.q}
-                  className="group rounded-xl border border-white/[0.08] bg-white/[0.02] open:border-primary-500/30"
-                >
-                  <summary className="cursor-pointer list-none px-5 py-4 text-base font-semibold text-white flex items-center justify-between">
-                    <span>{faq.q}</span>
-                    <span className="font-mono text-xs text-white/40 group-open:rotate-45 transition-transform">+</span>
-                  </summary>
-                  <div className="px-5 pb-5 text-sm text-white/65 leading-relaxed">{faq.a}</div>
-                </details>
-              ))}
+          <section className="mt-16 border-t border-white/[0.06] pt-12">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-primary-300 mb-6">
+              <span>FAQ</span>
+              <span className="h-px w-6 bg-primary-300/40" />
+              <span className="text-white/40">{meta.faqs.length}</span>
             </div>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-6">
+              Common questions.
+            </h2>
+            <BlogFaqList faqs={meta.faqs} />
           </section>
         )}
+      </article>
 
-        <div className="mt-16 flex items-center justify-between border-t border-white/[0.08] pt-8">
-          <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-white/55 hover:text-white transition-colors">
-            <ArrowLeft className="h-3.5 w-3.5" />
+      {/* FOOTER NAV + CTA */}
+      <section className="mx-auto w-full max-w-3xl px-4 sm:px-6 pb-12 pt-4 border-t border-white/[0.06] mt-4">
+        <div className="flex items-center justify-between pt-8">
+          <Link href="/blog" className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-white/55 hover:text-white transition-colors">
+            <ArrowLeft className="h-3 w-3" />
             All posts
           </Link>
           <Link
             href="/signup"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary-500 to-secondary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 transition-shadow"
+            className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-neutral-950 hover:bg-white/90 transition-colors"
           >
             Try PreAlgo free
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
-      </article>
-    </PageShell>
+      </section>
+
+      <section className="container-tight pb-24">
+        <div className="rounded-2xl border border-white/[0.10] bg-gradient-to-br from-primary-500/[0.12] via-primary-500/[0.04] to-transparent p-8 sm:p-12 text-center">
+          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-white">
+            Run your next video through it{' '}
+            <span className="accent-gradient">before you post.</span>
+          </h3>
+          <p className="mt-4 mx-auto max-w-md text-sm sm:text-base text-white/60 leading-relaxed">
+            First analysis is free. No credit card.
+          </p>
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/signup"
+              className="group inline-flex items-center justify-center gap-2 rounded-md bg-white px-6 py-3.5 text-sm font-semibold text-neutral-950 hover:bg-white/90 transition-colors"
+            >
+              Start free
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              href="/sample"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/12 bg-white/[0.03] px-6 py-3.5 text-sm font-medium text-white/85 hover:bg-white/[0.06] transition-colors"
+            >
+              See a sample
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 }

@@ -1,147 +1,209 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Cpu } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Navbar } from '../landing/Navbar';
 import { Footer } from '../landing/Footer';
 
+const founder = {
+  name: 'Evan Hand',
+  role: 'Founder',
+  image: 'https://media.licdn.com/dms/image/v2/D4E03AQG2vplaYI84eQ/profile-displayphoto-shrink_400_400/B4EZYR4D4JHUAk-/0/1744056631121?e=1779321600&v=beta&t=-ecVk-u6vKZfAo-SxwGneYaEf8X34TbwFXjuvw3RmYA',
+};
+
+const socials = [
+  { platform: 'X',         handle: '@Evan_Hand',   href: 'https://x.com/Evan_Hand' },
+  { platform: 'Instagram', handle: '@evanhandd',   href: 'https://instagram.com/evanhandd' },
+  { platform: 'YouTube',   handle: '@theevanhand', href: 'https://youtube.com/@theevanhand' },
+  { platform: 'TikTok',    handle: '@evhandd',     href: 'https://tiktok.com/@evhandd' },
+];
+
+const stats = [
+  { v: '1B+',     l: 'Founder views' },
+  { v: '1M+',     l: 'Founder followers' },
+  { v: '11,000+', l: 'Videos analyzed' },
+  { v: '1,000+',  l: 'Active creators' },
+];
+
+const beliefs = [
+  {
+    n: '01',
+    headline: 'Most "viral" advice is vibes.',
+    accent: 'We picked numbers.',
+    body: 'Hook archetypes. Retention curves. Specific timestamps. The model is trained on real performance, not threads.',
+  },
+  {
+    n: '02',
+    headline: 'Posting blind is the bug.',
+    accent: 'Pre-flight is the fix.',
+    body: 'You spend hours on a video. Spending 90 seconds to know how it will land before you post is the obvious move.',
+  },
+  {
+    n: '03',
+    headline: 'A grade is not a fix.',
+    accent: 'We give you the fix.',
+    body: 'Every analysis ends with a ranked list of changes with timestamps and predicted impact. Not "improve your hook."',
+  },
+];
+
 export const AboutPageContent: React.FC = () => {
-  const founder = {
-    name: 'Evan Hand',
-    role: 'Founder & CEO',
-    image: 'https://pbs.twimg.com/profile_images/1906347163522678784/mtS5ia2L_400x400.jpg',
-    bio: `Evan is a creator with over 1 billion views and 1 million+ followers. After dissecting the patterns behind viral content, he built PreAlgo to give every creator the same data-driven edge. PreAlgo is an AI-powered strategist built from the ground up by a creator, for creators.`,
-  };
-
-  const stats = [
-    { value: '11K+', label: 'Videos Analyzed' },
-    { value: '1B+', label: 'Creator Views (Founder)' },
-    { value: '1K+', label: 'Active Creators' },
-    { value: '95%', label: 'Analysis Accuracy' },
-  ];
-
-  const socials = [
-    { platform: 'X', handle: '@Evan_Hand', href: 'https://x.com/Evan_Hand' },
-    { platform: 'Instagram', handle: '@evanhandd', href: 'https://instagram.com/evanhandd' },
-    { platform: 'YouTube', handle: '@theevanhand', href: 'https://youtube.com/@theevanhand' },
-    { platform: 'TikTok', handle: '@evhandd', href: 'https://tiktok.com/@evhandd' },
-  ];
-
   return (
-    <div className="flex min-h-screen flex-col">
-            <Navbar />
+    <div className="flex min-h-screen flex-col bg-neutral-950 text-white">
+      <Navbar />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-primary-950 to-secondary-900 pt-32 pb-16 sm:pt-36 sm:pb-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(139,92,246,0.1),transparent)]" />
+      {/* HERO */}
+      <section className="relative overflow-hidden pt-32 sm:pt-40 pb-12">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-40 left-1/2 h-[700px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(168,85,247,0.18),transparent_70%)]" />
+          <div className="absolute inset-0 bg-grid-tight mask-radial-fade opacity-30" />
+        </div>
+
         <div className="container-tight relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <div className="mb-6 flex items-center justify-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-500/10 border border-primary-500/20">
-                <Cpu className="h-8 w-8 text-primary-400" />
-              </div>
-            </div>
-            <span className="mb-3 inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white/50">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-primary-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
               About
             </span>
-            <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
-              Built by Creators,
-              <br />
-              <span className="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
-                For Creators
-              </span>
+            <h1 className="max-w-4xl text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0] text-white">
+              Built by a creator{' '}
+              <span className="accent-gradient">with a billion views.</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-base text-white/70 sm:text-lg">
-              We understand the frustration of creating content that doesn't perform. That's why we built PreAlgo - to give you the insights you need before you post.
+            <p className="mt-6 max-w-xl text-base sm:text-lg text-white/60 leading-relaxed">
+              PreAlgo exists because guessing whether your next post will land is a stupid way to spend creative energy.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="bg-neutral-950 py-16 sm:py-20">
-        <div className="container-tight">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="rounded-xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-lg"
-              >
-                <p className="text-3xl font-bold text-white">{stat.value}</p>
-                <p className="mt-1 text-sm text-neutral-400">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Founder */}
-      <section className="bg-neutral-900 py-20 sm:py-28">
-        <div className="container-tight">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <span className="mb-3 inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white/50">
-              Meet the Founder
-            </span>
-            <h2 className="mt-4 mb-4 text-2xl font-bold text-white sm:text-3xl md:text-4xl">The Vision Behind PreAlgo</h2>
-            <p className="mx-auto max-w-2xl text-base text-neutral-400 sm:text-lg">
-              Built from real creator experience and a passion for data-driven content optimization
-            </p>
-          </motion.div>
-          <div className="mx-auto max-w-3xl">
+      {/* STATS */}
+      <section className="container-tight">
+        <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-b border-white/[0.06] divide-x divide-white/[0.06]">
+          {stats.map((s, i) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              key={s.l}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-lg lg:p-12"
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="px-4 sm:px-5 py-7"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-secondary-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <div className="relative flex flex-col items-center gap-8">
-                <div className="relative h-40 w-40 flex-shrink-0 lg:h-52 lg:w-52">
-                  <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-primary-500/20 via-secondary-500/20 to-primary-500/20 blur-xl" />
-                  <img
-                    src={founder.image}
-                    alt={founder.name}
-                    className="relative h-full w-full rounded-full object-cover ring-2 ring-white/10"
-                  />
-                </div>
-                <div className="flex-1 text-center">
-                  <h3 className="mb-2 text-2xl font-bold text-white">{founder.name}</h3>
-                  <p className="mb-6 text-lg font-medium text-primary-400">{founder.role}</p>
-                  <p className="text-neutral-400 leading-relaxed">{founder.bio}</p>
-                  <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                    {socials.map((social) => (
-                      <a
-                        key={social.platform}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition-colors hover:border-primary-500/30 hover:bg-primary-500/10 hover:text-white"
-                      >
-                        <span className="font-medium">{social.platform}</span>
-                        <span className="text-neutral-500">{social.handle}</span>
-                      </a>
-                    ))}
-                  </div>
+              <div className="text-2xl sm:text-4xl font-bold tracking-tight text-white tabular-nums">{s.v}</div>
+              <div className="font-mono text-[10px] uppercase tracking-widest text-white/45 mt-1.5">{s.l}</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* FOUNDER */}
+      <section className="container-tight pt-20 pb-12">
+        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-primary-300 mb-6">
+          <span>Founder</span>
+          <span className="h-px w-6 bg-primary-300/40" />
+          <span className="text-white/40">Evan Hand</span>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative"
+        >
+          <div className="absolute -inset-3 rounded-[28px] bg-gradient-to-br from-primary-500/15 via-primary-500/[0.04] to-transparent blur-2xl pointer-events-none" />
+          <div className="relative rounded-2xl border border-white/[0.10] bg-neutral-950/90 backdrop-blur-xl p-6 sm:p-10 shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-center">
+              <div className="relative h-40 w-40 sm:h-52 sm:w-52 mx-auto lg:mx-0">
+                <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-primary-500/30 via-secondary-500/20 to-primary-500/10 blur-xl" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={founder.image}
+                  alt={founder.name}
+                  className="relative h-full w-full rounded-full object-cover ring-2 ring-white/10"
+                />
+              </div>
+
+              <div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] text-white">
+                  Spent years figuring out{' '}
+                  <span className="accent-gradient">what actually goes viral.</span>
+                </h2>
+                <p className="mt-5 text-sm sm:text-base text-white/70 leading-relaxed max-w-2xl">
+                  Evan grew an audience past a million followers and a billion total views before realizing every breakthrough video had the same handful of patterns. PreAlgo is those patterns, automated, so every creator gets the same data-driven edge.
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {socials.map((s) => (
+                    <a
+                      key={s.platform}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2 rounded-md border border-white/[0.10] bg-white/[0.03] px-3 py-1.5 text-xs text-white/75 hover:bg-white/[0.06] hover:border-primary-500/30 hover:text-white transition-colors"
+                    >
+                      <span className="font-semibold">{s.platform}</span>
+                      <span className="font-mono text-white/45 group-hover:text-white/70 transition-colors">{s.handle}</span>
+                      <ArrowUpRight className="h-3 w-3 text-white/40 group-hover:text-primary-300 transition-colors" />
+                    </a>
+                  ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* BELIEFS */}
+      <main className="container-tight">
+        {beliefs.map((b, i) => (
+          <motion.section
+            key={b.n}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, delay: i * 0.05 }}
+            className="grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-6 lg:gap-12 py-12 border-t border-white/[0.06]"
+          >
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-widest text-primary-300">
+                §{b.n}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] text-white max-w-3xl">
+                {b.headline}{' '}
+                <span className="accent-gradient">{b.accent}</span>
+              </h3>
+              <p className="mt-4 text-sm sm:text-base text-white/55 leading-relaxed max-w-2xl">
+                {b.body}
+              </p>
+            </div>
+          </motion.section>
+        ))}
+      </main>
+
+      {/* CTA */}
+      <section className="container-tight pt-12 pb-24">
+        <div className="rounded-2xl border border-white/[0.10] bg-gradient-to-br from-primary-500/[0.12] via-primary-500/[0.04] to-transparent p-8 sm:p-12 text-center">
+          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-white">
+            Same edge.{' '}
+            <span className="accent-gradient">Run a video on us.</span>
+          </h3>
+          <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/signup"
+              className="group inline-flex items-center justify-center gap-2 rounded-md bg-white px-6 py-3.5 text-sm font-semibold text-neutral-950 hover:bg-white/90 transition-colors"
+            >
+              Start free
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              href="/features"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/12 bg-white/[0.03] px-6 py-3.5 text-sm font-medium text-white/85 hover:bg-white/[0.06] transition-colors"
+            >
+              What you get
+            </Link>
           </div>
         </div>
       </section>
@@ -150,3 +212,5 @@ export const AboutPageContent: React.FC = () => {
     </div>
   );
 };
+
+export default AboutPageContent;

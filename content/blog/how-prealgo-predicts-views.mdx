@@ -1,7 +1,7 @@
 ---
 title: "How PreAlgo predicts views before you post"
 description: "The system anchors on real posted videos, not synthetic estimates. Here's the algorithm explained without jargon."
-category: "guide"
+category: "how it works"
 date: "2026-05-02"
 tags: ["how it works", "view prediction", "ai grading", "creator tools"]
 faqs:
@@ -9,59 +9,100 @@ faqs:
     a: "Predictions are typically in the right order of magnitude. They won't reliably forecast viral outliers (5M+) but they'll get the creator-expected outcome and the upside ceiling close. Three numbers per platform: typical creator, your account, and best-case if it pops."
   - q: "Why does the same video get a slightly different grade across re-runs?"
     a: "The Gemini model that judges your video varies between runs (e.g. hook execution might score 4 vs 5). One point on a 1-5 scale propagates through the algorithm. We continue tuning to reduce that variance."
-  - q: "What does 'trained on 10,000+ videos' actually mean?"
-    a: "PreAlgo searches a database of 10,000+ real posted videos with actual view counts to find the closest comparables for your upload. Predictions reflect what those real comparable videos actually got, not synthetic estimates."
+  - q: "What does 'trained on 11,000+ videos' actually mean?"
+    a: "PreAlgo searches a database of 11,000+ real posted videos with actual view counts to find the closest comparables for your upload. Predictions reflect what those real comparable videos actually got, not synthetic estimates."
 ---
 
-Most "AI content tools" tell you to optimize your hook. They don't tell you what your video will actually do. PreAlgo does.
+<Lede>
+Most "AI content tools" tell you to optimize your hook. They don't tell you what your video will actually do. PreAlgo does, in four steps.
+</Lede>
 
-Here's how the prediction works, in four plain-English steps.
+<HeroStat
+  value="11,000+"
+  label="Real posted videos"
+  caption="With actual view counts. Every prediction anchors on real comparable performance, not synthetic estimates pulled from a model's intuition."
+/>
 
-## Step 1: Gemini watches the video
+## The four steps
 
-When you upload, the file streams to Google's Gemini model. It watches the full video and rates the components on a 1-5 scale: hook strength, value clarity, x-factor (the share-trigger), format quality, execution. These ratings become your **quality composite**, a single number out of 100.
+<Steps>
+  <Step n="01" title="Gemini watches the video">
+    Your file streams to Google's Gemini. It watches the full video and rates the components on a 1-5 scale: hook strength, value clarity, x-factor, format quality, execution. These ratings become a quality composite, a single number out of 100.
+  </Step>
+  <Step n="02" title="We pull real comparable videos">
+    The system searches the database for videos that are about the same thing as yours, using embedding similarity (so it finds videos with similar substance, not just similar tags). Three lenses: most similar, highest views, most recent.
+  </Step>
+  <Step n="03" title="Anchor on your account history">
+    If your account is linked, the algorithm pulls your own posting history. Your median post, your top 10%, your historical max. A creator whose past videos hit 1.7M shouldn't get predicted at the niche median of 30K.
+  </Step>
+  <Step n="04" title="Output 3 predictions per platform">
+    A 3x3 grid: typical creator, your account, best case if it pops. Across all three platforms.
+  </Step>
+</Steps>
 
-## Step 2: We pull real comparable videos
-
-We search a database of 10,000+ real posted videos with actual view counts. The search uses embedding similarity, which means it finds videos that are *about* the same thing as yours, not just videos with similar tags. Three different lenses:
+## Three lenses on the data
 
 <StatGrid>
-  <StatCard stat="Most similar" label="Nearest by embedding" />
-  <StatCard stat="Highest views" label="Topic ceiling" />
-  <StatCard stat="Most recent" label="Trending signal" />
+  <StatCard stat="Most similar" label="Embedding match" caption="Closest videos by substance" />
+  <StatCard stat="Highest views" label="Topic ceiling" caption="What's possible in this niche" />
+  <StatCard stat="Most recent" label="Trending signal" caption="What's working right now" />
 </StatGrid>
 
-This gives the validator a complete picture: floor, ceiling, and what's working *now*.
+This gives the validator a complete picture. Floor, ceiling, and what's working *now*.
 
-## Step 3: Anchor on creator history if available
+## What "your account" anchoring actually does
 
-If your prealgo account is linked to The Content Labs (or matches by email), the algorithm also pulls **your own** posting history. Your median post, your top 10%, your historical max. A creator whose past videos hit 1.7M shouldn't get predicted at the niche median of 30K.
+Two creators upload the same video. Without account history, both predictions look identical. With history, they look very different.
 
-This is the difference between "what happens if a typical creator posts this" and "what happens if **you** post this".
+<Compare
+  badLabel="Without your account"
+  goodLabel="With your account anchored"
+  bad="Predicted: 25K-50K views. Same number for everyone who uploads this video."
+  good="Predicted: 300K-500K. Calibrated against the median performance of your last 30 posts on this topic."
+/>
 
-## Step 4: Compute three predictions per platform
+<PullQuote attribution="The shift this enables">
+  "What happens if a typical creator posts this" is a different question from "what happens if you post this."
+</PullQuote>
 
-Output isn't a single number. It's a 3×3 grid:
+## The output: 3x3 grid
 
-|  | Typical creator | Your account | If it goes viral |
-|---|---|---|---|
-| **TikTok** | 25K-50K | 300K-500K | 1M-3M |
-| **Instagram** | 50K-75K | 150K-300K | 500K-750K |
-| **YouTube Shorts** | 8K-15K | 25K-50K | 150K-300K |
+The grid for a real analysis (creator: ~1M followers, niche: sports commentary):
 
-The *typical* column anchors on niche median. The *your account* column anchors on your historical distribution. The *best case* column anchors on the topic's ceiling. You see all three so you can size the upside without losing the realistic baseline.
+<ForecastGrid
+  rows={[
+    { platform: "TikTok",    typical: "3K-5K",  creator: "300K-500K", best: "3M-5M", isBest: true },
+    { platform: "Instagram", typical: "3K-5K",  creator: "300K-500K", best: "5M+",  isBest: false },
+    { platform: "YouTube",   typical: "1K-3K",  creator: "150K-300K", best: "1M-3M", isBest: false }
+  ]}
+/>
+
+You see all three columns. Sized upside without losing the realistic baseline.
 
 ## What it doesn't do
 
-PreAlgo won't predict 9M views on a video that nobody could have predicted. View distributions are heavy-tailed; the very long upper tail is genuinely hard to forecast in advance. What we will reliably tell you is whether the video's quality and creator-fit are good enough that it *could* break out, given the topical and platform context.
+<Callout type="warning" title="Won't predict the long tail">
+  View distributions are heavy-tailed. The very top end is genuinely hard to forecast in advance.
+</Callout>
+
+What it *will* tell you reliably: whether the video's quality and creator-fit are good enough that it could break out, given the topical and platform context. That's the question worth answering before you post.
 
 ## Why this beats keyword-driven tools
 
-Most "creator AI" tools optimize for SEO inside a video (titles, captions, hashtags). That's table stakes. The harder question is **does the video's structure work** — hook strength, retention curve, x-factor presence. PreAlgo grades those before you publish, so you can fix them before the algorithm sees them.
+<CheckList>
+  <CheckItem ok>Anchors on actual view counts from real comparable videos</CheckItem>
+  <CheckItem ok>Calibrates predictions to your specific account</CheckItem>
+  <CheckItem ok>Returns 3 numbers per platform, not 1 vague estimate</CheckItem>
+  <CheckItem ok={false}>Does not predict views from titles, captions, or hashtags alone</CheckItem>
+  <CheckItem ok={false}>Does not pretend to forecast 9M view outliers</CheckItem>
+</CheckList>
+
+Most "creator AI" tools optimize the SEO inside a video. That's table stakes. The harder question is whether the video's structure works. PreAlgo grades that before you publish.
 
 <CTA
-  headline="See your next video's grade before you post it."
-  sub="Free plan included. 60-120 second analysis. No credit card."
+  headline="See your next video's grade"
+  emphasis="before you post it."
+  sub="Free plan included. 60 to 120 second analysis. No credit card."
   primary="Analyze a video free"
   secondary="See pricing"
 />

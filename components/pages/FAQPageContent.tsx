@@ -1,224 +1,142 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HelpCircle, ChevronDown, Mail } from 'lucide-react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowRight, Mail } from 'lucide-react';
 import { Navbar } from '../landing/Navbar';
 import { Footer } from '../landing/Footer';
-import { JsonLd } from '../JsonLd';
+import { FaqItem } from '../landing/FaqItem';
 
-const faqs = [
+const FAQ_GROUPS = [
   {
-    category: 'Getting Started',
+    n: '01',
+    label: 'Getting started',
     questions: [
-      {
-        q: 'What is PreAlgo?',
-        a: 'PreAlgo is an AI-powered content analysis tool that predicts how your video will perform before you post it. Upload your video, and our AI - trained on 11,000+ real videos - gives you a content grade, view prediction, hook analysis, retention forecast, and specific recommendations to improve your content.'
-      },
-      {
-        q: 'How does PreAlgo work?',
-        a: 'Upload your video and our AI analyzes it against patterns from 11,000+ real videos. In about 30 seconds, you get a full analysis including predicted views, retention graph, hook effectiveness score, platform-specific feedback, and actionable optimization tips.'
-      },
-      {
-        q: 'What platforms does PreAlgo support?',
-        a: 'PreAlgo provides analysis and recommendations optimized for TikTok, Instagram Reels, and YouTube Shorts. Each analysis includes platform-specific feedback so you can tailor your content for each platform.'
-      },
-      {
-        q: 'What video formats are supported?',
-        a: 'We support MP4, MOV, WebM, and most common video formats. Videos can be up to 10 minutes long and 500MB in size.'
-      },
-    ]
+      { q: 'What is PreAlgo?', a: "AI that predicts how your video will perform before you post. Upload, get a grade, predicted views per platform, hook diagnosis, retention curve, and a ranked list of fixes with timestamps." },
+      { q: 'How does it work?', a: "Upload a video. Our AI analyzes it against patterns from 11,000+ real videos. About 60-90 seconds later you get the full analysis." },
+      { q: 'Which platforms does it support?', a: "TikTok, Instagram Reels, and YouTube Shorts. Every analysis includes platform-specific predictions and feedback for all three." },
+      { q: 'What video formats work?', a: "MP4, MOV, WebM, and most common formats. Up to 10 minutes long, up to 500MB." },
+    ],
   },
   {
-    category: 'Analysis & Accuracy',
+    n: '02',
+    label: 'Analysis + accuracy',
     questions: [
-      {
-        q: 'How accurate are the predictions?',
-        a: 'Our AI is trained on 11,000+ real videos and their actual performance data. Our grading is calibrated against real performance data - 56% of videos grade C-tier, only 1.6% earn A+, matching real-world view distributions. We analyze hook archetype, format type, and execution against verified benchmarks from creators across TikTok, Instagram, and YouTube Shorts.'
-      },
-      {
-        q: 'What does the analysis include?',
-        a: 'Each analysis includes: a content grade (A+ to F), predicted view range, retention graph showing where viewers drop off, hook effectiveness score, platform-specific feedback for TikTok/Instagram/YouTube, AI-generated hook rewrite, visual and audio quality assessment, CTA effectiveness rating, and specific optimization recommendations.'
-      },
-      {
-        q: 'How long does an analysis take?',
-        a: 'Most analyses complete in about 1-2 minutes. Longer videos may take up to 2 minutes.'
-      },
-      {
-        q: 'Can I re-analyze the same video after making changes?',
-        a: 'Yes! Each re-analysis counts as one analysis credit. We recommend making the suggested improvements and re-analyzing to see how your score improves.'
-      },
-    ]
+      { q: 'How accurate are the predictions?', a: "Our grading is calibrated against real performance: 56% of videos grade C-tier, only 1.6% earn A+, matching real-world view distributions. Predictions account for hook archetype, format type, and execution against benchmarks across all three platforms." },
+      { q: "What's actually included?", a: "Content grade (A+ to F), per-platform predicted views (typical / your account / best case), retention curve with predicted dropoff timestamp, hook archetype + scored breakdown + suggested rewrite, ranked fix list with timestamps and impact ratings, and pacing/audio/visual quality scores." },
+      { q: 'How long does it take?', a: "About 60 to 120 seconds for most videos. Longer videos take a bit more." },
+      { q: 'Can I re-analyze the same video?', a: "Yes. Each re-analysis uses one credit. Recommended after applying fixes so you can see the score move." },
+    ],
   },
   {
-    category: 'Pricing & Billing',
+    n: '03',
+    label: 'Pricing + billing',
     questions: [
-      {
-        q: 'Is there a free plan?',
-        a: 'Yes. The free plan includes 1 full analysis per month with all features - no credit card required.'
-      },
-      {
-        q: 'What counts as one analysis?',
-        a: 'Each video you upload and analyze counts as one analysis. Re-viewing a completed analysis does not use an additional credit.'
-      },
-      {
-        q: 'Can I upgrade or downgrade at any time?',
-        a: 'Yes. You can change your plan at any time from your account settings. Upgrades take effect immediately. Downgrades take effect at the end of your current billing period.'
-      },
-      {
-        q: 'Do unused analyses roll over?',
-        a: 'No, unused analyses do not roll over to the next month. Your count resets at the start of each billing period.'
-      },
-      {
-        q: 'Can I cancel anytime?',
-        a: 'Yes. There are no long-term contracts. Cancel anytime and continue using the service until the end of your billing period.'
-      },
-    ]
+      { q: 'Is there a free plan?', a: "Yes. One full analysis per month with all features. No credit card." },
+      { q: 'What counts as one analysis?', a: "Each video you upload is one. Reopening a finished analysis is free." },
+      { q: 'Can I upgrade or downgrade?', a: "Anytime. Upgrades are immediate. Downgrades take effect at the next billing cycle." },
+      { q: 'Do unused analyses roll over?', a: "No. Counts reset at the start of each billing period." },
+      { q: 'Can I cancel anytime?', a: "Yes. One click in settings. You keep access through the end of the period." },
+    ],
   },
   {
-    category: 'Privacy & Security',
+    n: '04',
+    label: 'Privacy + security',
     questions: [
-      {
-        q: 'Is my content kept private?',
-        a: 'Yes. Your uploaded videos are only accessible to you and are used solely for analysis. We never share, publish, or use your content for marketing without your explicit permission.'
-      },
-      {
-        q: 'How long do you store my videos?',
-        a: 'Uploaded videos are processed for analysis and are not permanently stored on our servers. Analysis results are retained while your account is active.'
-      },
-      {
-        q: 'Who can see my analysis results?',
-        a: 'Only you. Your analysis results are private to your account and are not shared with anyone.'
-      },
-    ]
+      { q: 'Is my content kept private?', a: "Yes. Your videos are only used for your analysis. We never share or republish your content without explicit permission." },
+      { q: 'How long do you store videos?', a: "Videos are processed and not permanently stored. Analysis results stay attached to your account while it's active." },
+      { q: 'Who can see my results?', a: "Only you. Results are private to your account." },
+    ],
   },
 ];
 
 export const FAQPageContent: React.FC = () => {
-  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
-
-  const toggleItem = (key: string) => {
-    setOpenItems((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
+  const [openKey, setOpenKey] = useState<string | null>(null);
 
   return (
-    <div className="flex min-h-screen flex-col">
-                  <Navbar />
+    <div className="flex min-h-screen flex-col bg-neutral-950 text-white">
+      <Navbar />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-primary-950 to-secondary-900 pt-32 pb-16 sm:pt-36 sm:pb-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(139,92,246,0.1),transparent)]" />
-        <div className="container-tight relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <div className="inline-flex items-center justify-center rounded-full bg-primary-500/20 p-3 mb-4">
-              <HelpCircle className="h-8 w-8 text-primary-400" />
-            </div>
-            <span className="mb-3 block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white/50 mx-auto w-fit">
+      {/* HERO */}
+      <section className="relative overflow-hidden pt-32 sm:pt-40 pb-12">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-40 left-1/2 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(168,85,247,0.18),transparent_70%)]" />
+          <div className="absolute inset-0 bg-grid-tight mask-radial-fade opacity-30" />
+        </div>
+
+        <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 relative text-center">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-primary-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
               FAQ
             </span>
-            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-primary-200 to-secondary-200 bg-clip-text text-transparent">
-              Frequently Asked Questions
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0] text-white">
+              The short answers.{' '}
+              <span className="accent-gradient">In one place.</span>
             </h1>
-            <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto mt-6">
-              Everything you need to know about PreAlgo. Can't find what you're looking for? Reach out to our team.
+            <p className="mt-6 mx-auto max-w-xl text-base sm:text-lg text-white/60 leading-relaxed">
+              Most people land here looking for one of these.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* FAQ Sections */}
-      {faqs.map((section, sectionIndex) => (
-        <section
-          key={section.category}
-          className={`${sectionIndex % 2 === 0 ? 'bg-neutral-950' : 'bg-neutral-900'} py-16 sm:py-20`}
-        >
-          <div className="container-tight">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="mb-8"
-            >
-              <span className="mb-3 inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white/50">
-                {section.category}
-              </span>
-            </motion.div>
-            <div className="mx-auto max-w-3xl space-y-3">
-              {section.questions.map((faq, i) => {
-                const key = `${sectionIndex}-${i}`;
-                const isOpen = openItems[key] || false;
+      {/* GROUPS */}
+      <main className="mx-auto w-full max-w-3xl px-4 sm:px-6 pt-8">
+        {FAQ_GROUPS.map((group, gIdx) => (
+          <section key={group.n} className={`py-12 ${gIdx > 0 ? 'border-t border-white/[0.06]' : ''}`}>
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-primary-300 mb-6">
+              <span>{group.n}</span>
+              <span className="h-px w-6 bg-primary-300/40" />
+              <span>{group.label}</span>
+            </div>
+
+            <div className="space-y-2">
+              {group.questions.map((faq, qIdx) => {
+                const key = `${group.n}-${qIdx}`;
+                const isOpen = openKey === key;
                 return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: i * 0.05 }}
-                    className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-md"
-                  >
-                    <button
-                      onClick={() => toggleItem(key)}
-                      className="flex w-full cursor-pointer items-center justify-between p-5 text-left text-white font-medium"
-                    >
-                      <span>{faq.q}</span>
-                      <motion.div
-                        animate={{ rotate: isOpen ? 180 : 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ChevronDown className="h-4 w-4 flex-shrink-0 text-white/40" />
-                      </motion.div>
-                    </button>
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-5 pb-5 text-sm text-white/70 leading-relaxed">
-                            {faq.a}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
+                  <FaqItem
+                    key={key}
+                    q={faq.q}
+                    a={faq.a}
+                    isOpen={isOpen}
+                    onToggle={() => setOpenKey(isOpen ? null : key)}
+                  />
                 );
               })}
             </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        ))}
+      </main>
 
-      {/* Contact */}
-      <section className="bg-neutral-950 py-16 sm:py-20">
-        <div className="container-tight">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="rounded-xl border border-primary-500/20 bg-primary-900/20 backdrop-blur-md p-8 text-center"
-          >
-            <h3 className="mb-2 text-xl font-semibold text-white">Still have questions?</h3>
-            <p className="mb-6 text-white/70">
-              Our team is here to help. Reach out and we'll get back to you within 24 hours.
-            </p>
+      {/* CTA */}
+      <section className="container-tight pt-12 pb-24">
+        <div className="rounded-2xl border border-white/[0.10] bg-gradient-to-br from-primary-500/[0.12] via-primary-500/[0.04] to-transparent p-8 sm:p-12 text-center">
+          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-white">
+            Didn&apos;t find it?{' '}
+            <span className="accent-gradient">Email us.</span>
+          </h3>
+          <p className="mt-4 mx-auto max-w-md text-sm sm:text-base text-white/60 leading-relaxed">
+            We get back within 24 hours.
+          </p>
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="mailto:business@thecontentlabs.io"
-              className="inline-flex items-center rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 px-6 py-3 text-white transition-all hover:shadow-lg hover:shadow-primary-500/20"
+              className="group inline-flex items-center justify-center gap-2 rounded-md bg-white px-6 py-3.5 text-sm font-semibold text-neutral-950 hover:bg-white/90 transition-colors"
             >
-              <Mail className="mr-2 h-4 w-4" />
-              Contact Support
+              <Mail className="h-4 w-4" />
+              business@thecontentlabs.io
             </a>
-          </motion.div>
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/12 bg-white/[0.03] px-6 py-3.5 text-sm font-medium text-white/85 hover:bg-white/[0.06] transition-colors"
+            >
+              Start free
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -226,3 +144,5 @@ export const FAQPageContent: React.FC = () => {
     </div>
   );
 };
+
+export default FAQPageContent;
