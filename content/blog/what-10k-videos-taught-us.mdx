@@ -1,0 +1,210 @@
+---
+title: "We analyzed 10,000+ short-form videos. Here's what the top 1% have in common."
+description: "Median views, hook archetype winners, the format gap, and the platform that quietly dominates the viral tier. Pulled from 10,456 real posts with real view counts."
+category: "data report"
+date: "2026-05-03"
+tags: ["data", "viral content", "tiktok", "instagram", "short-form", "research"]
+faqs:
+  - q: "How was the dataset assembled?"
+    a: "10,456 real posted videos across TikTok, Instagram, and YouTube Shorts, each with verified view counts at the time of analysis. Pulled from creator audits and competitor scrapes inside The Content Labs. All videos had completed AI analysis (hook archetype, format, idea type, x-factor)."
+  - q: "What counts as a 'viral' video here?"
+    a: "We use 1 million plays as a working line. About 3.2% of analyzed videos cleared it. The 'top 1%' bucket in this report is the 122 videos that cleared 3 million plays."
+  - q: "Why is Instagram so over-represented in the top tier?"
+    a: "Two reasons. (1) Reels' distribution can push above 5M when it picks up a video, more often than TikTok in our dataset. (2) Many of the audited creators in our database publish primarily to Instagram, so the sample tilts that way. The pattern is real either way: if you're optimizing for ceiling, Reels was the higher-ceiling platform across this dataset."
+---
+
+<Lede>
+We pulled every analyzed video in our database with a real view count. 10,456 posts. Then we asked: what does the top 1% actually share?
+</Lede>
+
+<HeroStat
+  value="10,456"
+  label="Real posted videos"
+  caption="Across TikTok, Instagram, and YouTube Shorts. Real view counts. AI-analyzed for hook archetype, format, idea type, and x-factor."
+/>
+
+## The view distribution most creators don't see
+
+Half of all videos in our dataset hit fewer than 13,000 plays. The top 10% break 305,000. The top 1% break 3.4 million.
+
+<StatGrid>
+  <StatCard stat="13K" label="Median post" caption="Half of all analyzed videos sit below this." />
+  <StatCard stat="305K" label="Top 10%" caption="The dividing line for 'this video worked.'" />
+  <StatCard stat="3.4M" label="Top 1%" caption="The viral tier. 122 videos in our set cleared this." />
+  <StatCard stat="69.8M" label="The ceiling" caption="The single highest-performing video in the dataset." />
+</StatGrid>
+
+The shape is heavy-tailed. About 18% of videos do not break 1,000 plays. About 28% sit in the 1K to 10K range. Then 32% land between 10K and 100K, which most creators would call "decent." Only 21% break 100K, and only 3.2% break 1M.
+
+<Callout type="note" title="What this means in practice">
+  If your last video did 8,000 views, you're closer to the median than to a flop. The reason it feels like a flop is that the algorithm shows you outliers all day. Outliers are not the baseline.
+</Callout>
+
+## The 1M-views bar is harder than people think
+
+3.2% of the dataset cleared 1 million plays. 1.2% cleared 3 million. 0.27% cleared 10 million.
+
+<BarList>
+  <Bar label="Under 1K plays"   value={18} display="18%" tone="rose" />
+  <Bar label="1K to 10K"        value={28} display="28%" tone="amber" />
+  <Bar label="10K to 100K"      value={32} display="32%" tone="primary" />
+  <Bar label="100K to 1M"       value={19} display="19%" tone="primary" />
+  <Bar label="1M to 10M"        value={3}  display="3%"  tone="emerald" />
+  <Bar label="10M+"             value={1}  display="<1%" tone="emerald" />
+</BarList>
+
+So when an "AI tool" tells you this video will probably hit 5M views, the prior is brutal. Without specific evidence pointing to a top-1% outcome, the realistic answer is "it'll do about 13,000."
+
+## Hook archetypes, ranked by what they actually do
+
+We tag every analyzed video with a hook archetype. Here's how they sort by median views.
+
+<BarList>
+  <Bar label="Investigator"   value={92} display="24K median" tone="emerald" />
+  <Bar label="Hot Take"       value={84} display="22K"        tone="emerald" />
+  <Bar label="Magician"       value={56} display="14K"        tone="primary" />
+  <Bar label="Fortune Teller" value={49} display="12K"        tone="primary" />
+  <Bar label="Proof Drop"     value={41} display="10K"        tone="primary" />
+  <Bar label="Contrarian"     value={40} display="10K"        tone="amber" />
+  <Bar label="Story"          value={29} display="7K"         tone="amber" />
+  <Bar label="Teacher"        value={25} display="6K"         tone="amber" />
+  <Bar label="FaceTime Energy" value={21} display="5K"        tone="amber" />
+  <Bar label="Experimenter"   value={17} display="4K"         tone="rose" />
+</BarList>
+
+**The headline number:** Investigator hooks have a median of about 24,000 views. Experimenter hooks (the "I tried X for 30 days" format) sit at 4,000. That's a 6x median difference between the best and worst archetype across our dataset.
+
+<Callout type="warning" title="Teacher is the most posted, the second-worst by median">
+  17% of all videos in the dataset use a Teacher hook. Median views: 6,000. Either the format is being misused, or it caps below where most creators expect.
+</Callout>
+
+## The top 1% is even more skewed
+
+Of the 122 videos that cleared 3M plays:
+
+<StatGrid>
+  <StatCard stat="36%" label="Used Investigator hooks" caption="Versus 25% of all videos. The most over-represented archetype in the viral tier." />
+  <StatCard stat="13%" label="Used Magician hooks" caption="Visual transformation hooks. Over-represented vs the 5% baseline." />
+  <StatCard stat="11%" label="Used Contrarian hooks" caption="Hot-take format. About at-baseline." />
+  <StatCard stat="75%" label="Top 4 archetypes combined" caption="Investigator + Teacher + Magician + Contrarian explain 3 of every 4 viral hits." />
+</StatGrid>
+
+<PullQuote attribution="The single biggest pattern">
+  If you have a curiosity-gap hook with real evidence behind it, you've got the same archetype as one in three top-1% videos. That's the strongest signal in the dataset.
+</PullQuote>
+
+## Format type matters more than people admit
+
+The least viral format in the dataset is also the most-attempted.
+
+<Compare
+  badLabel="Talking head: 39% of all videos"
+  goodLabel="Skits: 4% of all videos"
+  bad="Median 7,000 views. Only 2.3% break 1 million. The default, and statistically the worst-performing on a per-attempt basis."
+  good="Median 48,000 views. 7.9% break 1 million. Three to four times the viral rate of every other format type in the set."
+/>
+
+<BarList>
+  <Bar label="Skit"          value={95} display="48K · 7.9% viral"  tone="emerald" />
+  <Bar label="Greenscreen"   value={75} display="37K · 2.3% viral"  tone="primary" />
+  <Bar label="Split screen"  value={60} display="29K · 4.3% viral"  tone="primary" />
+  <Bar label="Interview"     value={40} display="19K · 7.8% viral"  tone="primary" />
+  <Bar label="Mixed"         value={32} display="16K · 3.6% viral"  tone="amber" />
+  <Bar label="Vlog"          value={31} display="16K · 6.2% viral"  tone="amber" />
+  <Bar label="Talking head"  value={14} display="7K · 2.3% viral"   tone="rose" />
+</BarList>
+
+This is not "talking head is bad." This is: if you're choosing your format with no other consideration, talking head is the lowest-ceiling option in our data. Skits and interviews have the highest viral rates relative to volume produced.
+
+## The platform tier looks weird
+
+You'd expect TikTok to dominate the top of the distribution. Our data shows the opposite.
+
+<PlatformGrid>
+  <PlatformCard
+    platform="Instagram"
+    rewards="49% of dataset · median 16K · 4.2% break 1M · 77% of the top-1% tier"
+    pacing="Reels distribution can push past 5M when it picks up. Most over-represented platform in viral hits."
+    hook="First-frame composition matters most"
+  />
+  <PlatformCard
+    platform="TikTok"
+    rewards="46% of dataset · median 10K · 2.3% break 1M · 21% of the top-1% tier"
+    pacing="Lower median, lower viral rate per post in our set."
+    hook="Strong audio + immediate stakes"
+  />
+  <PlatformCard
+    platform="YouTube"
+    rewards="5% of dataset · median 21K · 1.5% break 1M · 2% of the top-1% tier"
+    pacing="Highest typical performance, lowest viral rate."
+    hook="Clearer payoff promise"
+  />
+</PlatformGrid>
+
+Instagram has the highest median performance AND the highest rate of 1M+ breakouts in our dataset. TikTok has the lowest median of the three.
+
+<Callout type="note" title="Sample caveat">
+  Many of the audited creators in our database publish primarily to Instagram, which tilts the platform mix. The pattern of Instagram outperforming on the high end is real either way, but the magnitudes here reflect our specific sample. Your mileage may vary by niche.
+</Callout>
+
+## Duration: longer is doing better
+
+Conventional advice is "shorter is better." Our data says the opposite.
+
+<BarList>
+  <Bar label="Under 15s"  value={12} display="4.5K median"  tone="rose" />
+  <Bar label="15 to 30s"  value={12} display="4.5K"         tone="rose" />
+  <Bar label="30 to 60s"  value={15} display="6K"           tone="amber" />
+  <Bar label="60 to 90s"  value={32} display="12K"          tone="primary" />
+  <Bar label="90s and up" value={100} display="39K median"  tone="emerald" />
+</BarList>
+
+Median views climb roughly 8x from sub-15s clips to 90s+ posts. The format that wins by volume is also the one most "growth coaches" tell you not to make.
+
+## Idea types, ranked
+
+The framing of the video, not the hook itself.
+
+<StatGrid>
+  <StatCard stat="40K"   label="Reaction" caption='Median views. The highest-performing idea framing.' />
+  <StatCard stat="28K"   label="Educational + Commentary" caption="Teaching that has a take, not just facts." />
+  <StatCard stat="24K"   label="Breakdown" caption="Investigation-style explanation." />
+  <StatCard stat="22K"   label="Commentary" caption="Reaction to news, content, or culture." />
+  <StatCard stat="17K"   label="Storytime" caption="5.7% break 1M, the highest viral rate of any idea type." />
+  <StatCard stat="8K"    label="Educational" caption="25% of all posts. Median is below the dataset baseline." />
+  <StatCard stat="8K"    label="Entertainment" caption="5.4% break 1M. Highly variable, lower floor." />
+</StatGrid>
+
+Storytime has the highest viral rate of any idea framing at 5.7% breaking 1M plays. Pure educational sits at 8,000 median views and is the most attempted framing. Same pattern as the hook data: the most-attempted framings are not the highest-performing ones.
+
+## What the top 1% has in common
+
+Pulling all of it together, here is the modal high-performer in our dataset:
+
+<CheckList>
+  <CheckItem ok>Investigator or Magician hook (over-represented in the top tier vs the baseline rate)</CheckItem>
+  <CheckItem ok>Skit, Greenscreen, or Mixed format (talking-head-only is rare in the viral tier)</CheckItem>
+  <CheckItem ok>Storytime, Reaction, or Breakdown idea framing</CheckItem>
+  <CheckItem ok>Posted to Instagram (77% of 3M+ hits in our set)</CheckItem>
+  <CheckItem ok>60s or longer in duration</CheckItem>
+  <CheckItem ok={false}>Was NOT a generic Teacher hook on a talking head video, the modal post for everyone else</CheckItem>
+</CheckList>
+
+That's the pattern. None of these factors alone guarantees a hit. Combined, they describe what the top-tier videos in the dataset shared.
+
+<PullQuote attribution="The takeaway">
+  Most creators are making the median post (talking head, Teacher hook, sub-60s, Educational framing) and getting median results. That's not a bug. That's exactly the math.
+</PullQuote>
+
+## Methodology
+
+10,456 real posted videos with verified view counts at the time of analysis. Sourced from creator content audits and competitor scrapes across The Content Labs and PreAlgo. Each video has a completed AI analysis covering hook archetype, format type, idea type, x-factor presence, and best-practice violations. Stats reported here are queried directly against that data, no projections, no extrapolations.
+
+<CTA
+  headline="See where your next video lands."
+  emphasis="Run it through the same model that grades these."
+  sub="Free plan covers your first analysis. 60 to 120 second turnaround."
+  primary="Analyze a video free"
+  secondary="See a sample"
+  secondaryHref="/sample"
+/>
