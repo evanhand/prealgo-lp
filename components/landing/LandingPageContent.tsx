@@ -543,7 +543,11 @@ const FeatureCard: React.FC<{
   );
 };
 
-export const LandingPageContent: React.FC = () => {
+interface LandingPageContentProps {
+  reviewsSlot?: React.ReactNode;
+}
+
+export const LandingPageContent: React.FC<LandingPageContentProps> = ({ reviewsSlot }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   // Hero carousel
@@ -1284,6 +1288,8 @@ export const LandingPageContent: React.FC = () => {
           </motion.div>
         </div>
       </section>
+
+      {reviewsSlot}
 
       <Footer />
     </div>
