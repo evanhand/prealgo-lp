@@ -99,6 +99,8 @@ export function initAnalytics() {
     capture_pageview: true,
     capture_pageleave: true,
     autocapture: true,
+    // Explicit exception autocapture so $exception events carry message/type/stack.
+    capture_exceptions: true,
     persistence: 'localStorage+cookie',
     loaded: (ph) => {
       ph.register({ app: 'prealgo-lp' });
